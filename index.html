@@ -706,7 +706,7 @@
             <div class="eyebrow mono">Independent developer · creative technologist</div>
             <h1>I make <span class="gradient-text">playful things</span><br>that feel alive.</h1>
             <p>
-              I'm Shahadah — a builder who loves turning wild ideas into interactive web experiences.
+              I’m Shahadah — a builder who loves turning wild ideas into interactive web experiences.
               My work spans game design, browser experiments, 3D worlds, creative coding and small utility tools that make the web a bit more fun.
             </p>
             <div class="hero-actions">
@@ -738,7 +738,7 @@
               <div class="eyebrow mono">Live signal</div>
               <h2 class="section-title">Numbers,<br><span class="gradient-text">but human.</span></h2>
             </div>
-            <p class="section-copy">The profile is real, the experiments are active, and the work is always evolving. This is the public trail of what I've built so far.</p>
+            <p class="section-copy">The profile is real, the experiments are active, and the work is always evolving. This is the public trail of what I’ve built so far.</p>
           </div>
 
           <div class="stats-grid">
@@ -774,7 +774,7 @@
           <div class="about-grid">
             <div class="about-card">
               <p>
-                I'm the kind of developer who likes to make ideas feel tactile: browser games, 3D experiences, immersive interfaces, AI-powered demos, and tools that people can actually use.
+                I’m the kind of developer who likes to make ideas feel tactile: browser games, 3D experiences, immersive interfaces, AI-powered demos, and tools that people can actually use.
                 My work sits somewhere between experimentation and craftsmanship — full of motion, color, and curiosity.
               </p>
               <div class="skill-wrap mono">
@@ -801,7 +801,7 @@
               </li>
               <li>
                 <strong>Shipping ideas, not just concepts</strong>
-                <span>Whether it's a game, a prototype, or a website for a real-world project, I care about making the result feel complete and alive.</span>
+                <span>Whether it’s a game, a prototype, or a website for a real-world project, I care about making the result feel complete and alive.</span>
               </li>
             </ul>
           </div>
@@ -860,7 +860,7 @@
       <section class="section" id="contact">
         <div class="wrap">
           <div class="contact-panel">
-            <div class="eyebrow mono">Let's build something</div>
+            <div class="eyebrow mono">Let’s build something</div>
             <h2>Need a browser experience with personality?</h2>
             <p>
               I enjoy building interactive projects that feel premium, expressive, and memorable — whether that means a game, a creative experience, a tool, or a website with real energy.
@@ -957,211 +957,102 @@
 
     function makeThreeBackground() {
       const mount = document.getElementById('threeScene');
-      if (!mount) return;
-
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(50, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-      camera.position.z = 25;
+      camera.position.z = 18;
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(mount.clientWidth, mount.clientHeight);
       mount.appendChild(renderer.domElement);
 
-      // Create scene group
-      const sceneGroup = new THREE.Group();
-      scene.add(sceneGroup);
+      const group = new THREE.Group();
+      scene.add(group);
 
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-      scene.add(ambientLight);
-      
-      const pointLight1 = new THREE.PointLight(0xa3ff5d, 0.8, 50);
-      pointLight1.position.set(10, 10, 15);
-      scene.add(pointLight1);
-      
-      const pointLight2 = new THREE.PointLight(0x44d6ff, 0.6, 50);
-      pointLight2.position.set(-10, -5, 10);
-      scene.add(pointLight2);
-
-      // Create laptop
-      const laptopGroup = new THREE.Group();
-      laptopGroup.position.set(-2, 0, 0);
-
-      // Laptop base/keyboard
-      const keyboardGeometry = new THREE.BoxGeometry(3, 0.15, 2);
-      const keyboardMaterial = new THREE.MeshStandardMaterial({
-        color: 0x1a1a1a,
-        metalness: 0.4,
-        roughness: 0.6
-      });
-      const keyboard = new THREE.Mesh(keyboardGeometry, keyboardMaterial);
-      keyboard.position.z = 1;
-      keyboard.castShadow = true;
-      laptopGroup.add(keyboard);
-
-      // Laptop screen
-      const screenGeometry = new THREE.BoxGeometry(3, 2, 0.1);
-      const screenMaterial = new THREE.MeshStandardMaterial({
-        color: 0x0a0e0c,
-        metalness: 0.3,
-        roughness: 0.4,
-        emissive: 0x2a5a4f,
-        emissiveIntensity: 0.4
-      });
-      const screen = new THREE.Mesh(screenGeometry, screenMaterial);
-      screen.position.set(0, 1.2, 0.8);
-      screen.rotation.x = -0.4;
-      screen.castShadow = true;
-      laptopGroup.add(screen);
-
-      // Screen glow
-      const glowGeometry = new THREE.BoxGeometry(3.1, 2.1, 0.2);
-      const glowMaterial = new THREE.MeshStandardMaterial({
-        color: 0x4ef0d1,
-        emissive: 0x4ef0d1,
-        emissiveIntensity: 0.2,
+      const geometry = new THREE.IcosahedronGeometry(1.2, 1);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x7af8d1,
+        emissive: 0x3ad8b1,
+        metalness: 0.2,
+        roughness: 0.25,
         transparent: true,
-        opacity: 0.3
-      });
-      const screenGlow = new THREE.Mesh(glowGeometry, glowMaterial);
-      screenGlow.position.copy(screen.position);
-      screenGlow.rotation.copy(screen.rotation);
-      laptopGroup.add(screenGlow);
-
-      sceneGroup.add(laptopGroup);
-
-      // Create mouse
-      const mouseGroup = new THREE.Group();
-      mouseGroup.position.set(2.5, 0.15, 0.5);
-
-      // Mouse body
-      const mouseBodyGeometry = new THREE.BoxGeometry(0.8, 0.4, 1.2);
-      const mouseMaterial = new THREE.MeshStandardMaterial({
-        color: 0x2a2a2a,
-        metalness: 0.5,
-        roughness: 0.5
-      });
-      const mouseBody = new THREE.Mesh(mouseBodyGeometry, mouseMaterial);
-      mouseBody.castShadow = true;
-      mouseGroup.add(mouseBody);
-
-      // Mouse scroll wheel
-      const wheelGeometry = new THREE.CylinderGeometry(0.15, 0.15, 0.2, 16);
-      const wheelMaterial = new THREE.MeshStandardMaterial({
-        color: 0x1a1a1a,
-        metalness: 0.7,
-        roughness: 0.3
-      });
-      const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
-      wheel.rotation.z = Math.PI / 2;
-      wheel.position.set(0, 0.15, 0);
-      mouseGroup.add(wheel);
-
-      sceneGroup.add(mouseGroup);
-
-      // Create keyboard with typing animation
-      const keyWidth = 0.2;
-      const keyHeight = 0.15;
-      const keyDepth = 0.08;
-      
-      const keyGeometry = new THREE.BoxGeometry(keyWidth, keyDepth, keyHeight);
-      const keyMaterial = new THREE.MeshStandardMaterial({
-        color: 0x3a3a3a,
-        metalness: 0.3,
-        roughness: 0.7
+        opacity: 0.9
       });
 
-      const keyRows = [
-        ['Q', 'W', 'E', 'R', 'T', 'Y'],
-        ['A', 'S', 'D', 'F', 'G', 'H'],
-        ['Z', 'X', 'C', 'V', 'B', 'N']
-      ];
+      const mesh1 = new THREE.Mesh(geometry, material.clone());
+      mesh1.position.set(-4, 0.5, 0);
+      const mesh2 = new THREE.Mesh(geometry, material.clone());
+      mesh2.position.set(2.5, -1, -2);
+      const mesh3 = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
+        color: 0x55c7ff,
+        emissive: 0x2a8ae2,
+        metalness: 0.25,
+        roughness: 0.22,
+        transparent: true,
+        opacity: 0.8
+      }));
+      mesh3.position.set(4, 2.5, -1);
 
-      const keys = [];
-      keyRows.forEach((row, rowIdx) => {
-        row.forEach((letter, colIdx) => {
-          const key = new THREE.Mesh(keyGeometry, keyMaterial.clone());
-          const xPos = (colIdx - row.length / 2) * (keyWidth + 0.05) - 0.8;
-          const yPos = -(rowIdx - 1) * (keyHeight + 0.08);
-          key.position.set(xPos, 0.05, yPos);
-          key.userData = { originalY: key.position.y, letter };
-          key.castShadow = true;
-          keyboards.add(key);
-          keys.push(key);
-        });
+      group.add(mesh1, mesh2, mesh3);
+
+      const particles = 220;
+      const particleGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particles * 3);
+      for (let i = 0; i < particles * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 18;
+        positions[i + 1] = (Math.random() - 0.5) * 12;
+        positions[i + 2] = (Math.random() - 0.5) * 18;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: 0xcaf7ff,
+        size: 0.043,
+        transparent: true,
+        opacity: 0.9
       });
+      const particleSystem = new THREE.Points(particleGeo, particleMat);
+      scene.add(particleSystem);
 
-      const keyboards = new THREE.Group();
-      keyboards.position.set(-1.5, -0.5, -0.5);
-      laptopGroup.add(keyboards);
+      const ambient = new THREE.AmbientLight(0xffffff, 1.2);
+      scene.add(ambient);
+      const spotlight = new THREE.PointLight(0x7bf7c5, 1.8, 30);
+      spotlight.position.set(0, 0, 10);
+      scene.add(spotlight);
 
-      // Animation loop
-      let time = 0;
-      let mousePathTime = 0;
-      let typeTime = 0;
+      const blueSpot = new THREE.PointLight(0x4ac9ff, 1.4, 30);
+      blueSpot.position.set(-10, 5, 12);
+      scene.add(blueSpot);
+
+      const clock = new THREE.Clock();
 
       function animate() {
-        requestAnimationFrame(animate);
-        time += 0.016;
-        mousePathTime += 0.01;
-        typeTime += 0.02;
-
-        // Rotate entire scene slowly
-        sceneGroup.rotation.y = Math.sin(time * 0.3) * 0.3;
-        sceneGroup.rotation.x = Math.cos(time * 0.25) * 0.15;
-
-        // Animate mouse movement
-        const mouseX = Math.sin(mousePathTime * 1.5) * 3;
-        const mouseY = Math.cos(mousePathTime * 2) * 0.8 + 0.2;
-        mouseGroup.position.lerp(
-          new THREE.Vector3(2.5 + mouseX, mouseY, 0.5 + Math.sin(mousePathTime) * 0.5),
-          0.1
-        );
-
-        // Rotate mouse wheel
-        wheel.rotation.x = mousePathTime * 3;
-
-        // Animate keyboard typing
-        keys.forEach((key, idx) => {
-          const typingRandom = Math.sin(typeTime + idx * 0.5) * 0.5 + 0.5;
-          const isActive = typingRandom > 0.7;
-          
-          if (isActive) {
-            const pressDepth = Math.max(0, Math.sin(typeTime + idx * 0.5) * 0.08);
-            key.position.y = key.userData.originalY - pressDepth;
-            key.material.emissive.setHex(0x4ef0d1);
-            key.material.emissiveIntensity = 0.6;
-          } else {
-            key.position.y = key.userData.originalY;
-            key.material.emissive.setHex(0x000000);
-            key.material.emissiveIntensity = 0;
-          }
-        });
-
-        // Screen flicker effect
-        screenMaterial.emissiveIntensity = 0.4 + Math.sin(time * 2) * 0.15;
-
+        const t = clock.getElapsedTime();
+        mesh1.rotation.x = t * 0.4;
+        mesh1.rotation.y = t * 0.9;
+        mesh2.rotation.y = -t * 0.6;
+        mesh2.rotation.z = t * 0.3;
+        mesh3.rotation.x = -t * 0.8;
+        mesh3.rotation.y = t * 0.7;
+        particleSystem.rotation.y = t * 0.08;
+        group.rotation.z = Math.sin(t * 0.75) * 0.18;
         renderer.render(scene, camera);
+        requestAnimationFrame(animate);
       }
 
       animate();
 
-      // Handle window resize
-      function onWindowResize() {
-        const width = mount.clientWidth;
-        const height = mount.clientHeight;
-        camera.aspect = width / height;
+      function resize() {
+        camera.aspect = mount.clientWidth / mount.clientHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
+        renderer.setSize(mount.clientWidth, mount.clientHeight);
       }
-
-      window.addEventListener('resize', onWindowResize);
+      window.addEventListener('resize', resize);
     }
 
-    // Initialize
-    makeThreeBackground();
-    loadGitHubStats();
+    document.addEventListener('DOMContentLoaded', () => {
+      makeThreeBackground();
+      loadGitHubStats();
+    });
   </script>
 </body>
 </html>
