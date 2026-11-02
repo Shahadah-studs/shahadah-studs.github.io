@@ -500,6 +500,44 @@
         font-size: 0.92rem;
       }
 
+      .repo-toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .repo-status {
+        color: var(--muted);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .repo-status .live {
+        color: var(--green);
+        text-shadow: 0 0 16px rgba(163,255,93,0.5);
+        margin-right: 8px;
+      }
+
+      .repo-search {
+        width: min(280px, 100%);
+        background: rgba(5, 16, 13, 0.7);
+        border: 1px solid var(--line);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 0.82rem;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .repo-search:focus {
+        border-color: rgba(68,214,255,0.8);
+        box-shadow: 0 0 0 3px rgba(68,214,255,0.08);
+      }
+
       .project-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -564,6 +602,13 @@
       .project-meta .lang { color: var(--green); }
       .project-meta .arrow { color: var(--cyan); font-size: 1.2rem; }
 
+      .empty-state {
+        grid-column: 1 / -1;
+        padding: 20px 0;
+        text-align: center;
+        color: var(--muted);
+      }
+
       .contact-panel {
         position: relative;
         overflow: hidden;
@@ -624,6 +669,8 @@
         .section-head, .footer { display: block; }
         .hero { padding-top: 44px; }
         .visual-box { min-height: 420px; }
+        .repo-toolbar { display: block; }
+        .repo-search { width: 100%; margin-top: 12px; }
       }
     </style>
   </head>
@@ -665,9 +712,9 @@
             </div>
 
             <div class="meta-row">
-              <div><strong>10+</strong> experiments</div>
-              <div><strong>3D</strong> driven ideas</div>
-              <div><strong>∞</strong> curiosity</div>
+              <div><strong id="repoCount">—</strong> public repos</div>
+              <div><strong id="starCount">—</strong> stars</div>
+              <div><strong id="followerCount">—</strong> followers</div>
             </div>
           </div>
 
@@ -700,29 +747,29 @@
           <div class="section-head">
             <div>
               <div class="eyebrow">Live signal</div>
-              <h2 class="section-title">Creative work,<br><span class="gradient-text">with personality.</span></h2>
+              <h2 class="section-title">GitHub stats,<br><span class="gradient-text">for real.</span></h2>
             </div>
             <p class="section-copy">
-              The portfolio reflects a mix of experimentation, craftsmanship, and idea-first building. Every project is shaped by motion, intention, and a little bit of chaos.
+              The profile is live, the projects are real, and the work reflects what’s actually on GitHub right now.
             </p>
           </div>
 
           <div class="stats-grid">
             <div class="stat-box">
-              <strong>5+</strong>
-              <span>Creative stacks</span>
+              <strong id="publicRepos">—</strong>
+              <span>Public repos</span>
             </div>
             <div class="stat-box">
-              <strong>24/7</strong>
-              <span>Curiosity mode</span>
+              <strong id="totalStars">—</strong>
+              <span>Total stars</span>
             </div>
             <div class="stat-box">
-              <strong>3D</strong>
-              <span>Experiments</span>
+              <strong id="followers">—</strong>
+              <span>Followers</span>
             </div>
             <div class="stat-box">
-              <strong>∞</strong>
-              <span>Ideas</span>
+              <strong id="following">—</strong>
+              <span>Following</span>
             </div>
           </div>
         </div>
@@ -805,55 +852,18 @@
         <div class="wrap">
           <div class="section-head">
             <div>
-              <div class="eyebrow">Selected work</div>
-              <h2 class="section-title">Recent <span class="gradient-text">projects.</span></h2>
+              <div class="eyebrow">Repo archive</div>
+              <h2 class="section-title">Every public<br><span class="gradient-text">project.</span></h2>
             </div>
-            <p class="section-copy">A mix of experiments, browser ideas, and small but meaningful builds that reflect the kind of work I care about.</p>
+            <p class="section-copy">This archive reflects the real GitHub work behind the portfolio: experiments, tools, games, and browser builds.</p>
           </div>
 
-          <div class="project-grid">
-            <a class="project-card" href="https://github.com/Shahadah-studs" target="_blank" rel="noreferrer">
-              <div class="project-top">
-                <span>Public</span>
-                <span>2026</span>
-              </div>
-              <h3 class="project-name">Creative Lab</h3>
-              <p>Experimental browser work focused on interaction, playful motion, and immersive visual storytelling.</p>
-              <div class="project-meta">
-                <span class="lang">Web</span>
-                <span>★ 12</span>
-                <span class="arrow">→</span>
-              </div>
-            </a>
-
-            <a class="project-card" href="https://github.com/Shahadah-studs" target="_blank" rel="noreferrer">
-              <div class="project-top">
-                <span>Public</span>
-                <span>2026</span>
-              </div>
-              <h3 class="project-name">Game Prototypes</h3>
-              <p>Playable experiments that explore mechanics, atmosphere, and interaction loops in more game-like spaces.</p>
-              <div class="project-meta">
-                <span class="lang">Game</span>
-                <span>★ 18</span>
-                <span class="arrow">→</span>
-              </div>
-            </a>
-
-            <a class="project-card" href="https://github.com/Shahadah-studs" target="_blank" rel="noreferrer">
-              <div class="project-top">
-                <span>Public</span>
-                <span>2026</span>
-              </div>
-              <h3 class="project-name">3D Experiments</h3>
-              <p>Visual explorations built around geometry, lighting, movement, and browser-based spatial design.</p>
-              <div class="project-meta">
-                <span class="lang">3D</span>
-                <span>★ 27</span>
-                <span class="arrow">→</span>
-              </div>
-            </a>
+          <div class="repo-toolbar">
+            <div class="repo-status"><span class="live">●</span><span id="repoStatus">Syncing with GitHub...</span></div>
+            <input id="repoSearch" type="text" class="repo-search" placeholder="Filter projects..." aria-label="Filter projects" />
           </div>
+
+          <div id="projects" class="project-grid"></div>
         </div>
       </section>
 
@@ -882,7 +892,84 @@
     </footer>
 
     <script>
+      const profileUrl = 'https://api.github.com/users/Shahadah-studs';
+      const reposUrl = 'https://api.github.com/users/Shahadah-studs/repos?per_page=100&sort=updated';
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat('en-US', {
+          notation: value >= 1000 ? 'compact' : 'standard',
+          maximumFractionDigits: 1
+        }).format(value || 0);
+      }
+
+      async function loadGitHubStats() {
+        try {
+          const [profileRes, reposRes] = await Promise.all([
+            fetch(profileUrl),
+            fetch(reposUrl)
+          ]);
+
+          const profile = await profileRes.json();
+          const repos = await reposRes.json();
+          const publicRepos = Array.isArray(repos) ? repos.filter(repo => !repo.fork) : [];
+          const totalStars = publicRepos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+
+          document.getElementById('repoCount').textContent = formatNumber(profile.public_repos || publicRepos.length);
+          document.getElementById('starCount').textContent = formatNumber(totalStars);
+          document.getElementById('followerCount').textContent = formatNumber(profile.followers || 0);
+
+          document.getElementById('publicRepos').textContent = formatNumber(profile.public_repos || publicRepos.length);
+          document.getElementById('totalStars').textContent = formatNumber(totalStars);
+          document.getElementById('followers').textContent = formatNumber(profile.followers || 0);
+          document.getElementById('following').textContent = formatNumber(profile.following || 0);
+          document.getElementById('repoStatus').textContent = `${publicRepos.length} live repositories`;
+
+          renderProjects(publicRepos);
+        } catch (error) {
+          document.getElementById('repoStatus').textContent = 'GitHub data unavailable';
+          document.getElementById('projects').innerHTML = '<div class="empty-state">Could not load repository data. Visit the GitHub profile directly.</div>';
+        }
+      }
+
+      function renderProjects(repos) {
+        const search = document.getElementById('repoSearch').value.toLowerCase();
+        const filtered = repos.filter(repo => {
+          const text = `${repo.name} ${repo.description || ''} ${repo.language || ''}`.toLowerCase();
+          return text.includes(search);
+        });
+
+        if (!filtered.length) {
+          document.getElementById('projects').innerHTML = '<div class="empty-state">No repositories match that search.</div>';
+          return;
+        }
+
+        document.getElementById('projects').innerHTML = filtered.map(repo => {
+          const description = repo.description && repo.description.trim() ? repo.description : 'A self-directed project by Shahadah_Studios.';
+          return `
+            <a class="project-card" href="${repo.html_url}" target="_blank" rel="noreferrer">
+              <div class="project-top">
+                <span>${repo.private ? 'Private' : 'Public'}</span>
+                <span>${new Date(repo.updated_at).getFullYear()}</span>
+              </div>
+              <h3 class="project-name">${repo.name}</h3>
+              <p class="project-desc">${description}</p>
+              <div class="project-meta">
+                <span class="lang">${repo.language || 'Code'}</span>
+                <span>★ ${repo.stargazers_count || 0}</span>
+                <span>⎇ ${repo.forks_count || 0}</span>
+                <span class="arrow">→</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('repoSearch').addEventListener('input', function () {
+        loadGitHubStats();
+      });
+
       document.getElementById('year').textContent = new Date().getFullYear();
+      loadGitHubStats();
     </script>
   </body>
 </html>
